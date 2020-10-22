@@ -1,0 +1,192 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+//  Antonio Erick Vieira Rodrigues 
+//  Alexandre Morales Suete 
+//  Alexandre de Souza Filho 
+// 	Gabriel freitas 
+int lugar()
+{
+    char poltrona;
+    int vetor,assento, cont = 0;
+    printf("\nEscolha o acento onde vai sentar:\n");
+    printf("\nJanela (J) Corredor (C)\n");
+    while(cont == 0){
+        scanf(" %c", &poltrona);
+        if((poltrona == 'J')||(poltrona == 'j')){
+            printf("\nAgora digite o numero de 1 a 24 do lugar escolhido:\n");
+            cont = 1;
+            int cont2 = 0;
+            while(cont2 == 0){
+            scanf("%i", &assento);
+                if((assento >= 1) && (assento <= 24)){
+                    vetor = assento;
+                cont2 = 1;
+                }else{
+                    printf("\nOps! O número digitado não é valido, por favor digite um numero entre 1 e 24\n");
+                }
+            }
+            cont = 1;
+        }else if((poltrona == 'C')||(poltrona == 'c')){
+            printf("\nAgora digite o numero de 1 a 24 do lugar escolhido:\n");
+            cont = 1;
+            int cont2 = 0;
+            while(cont2 == 0){
+            scanf("%i", &assento);
+                if((assento >= 1) && (assento <= 24)){
+                    vetor = assento + 24;
+                cont2 = 1;
+                }else{
+                    printf("\nOps! O número digitado não é valido, por favor digite um numero entre 1 e 24\n");
+                }
+            }
+        }else{
+            printf("\nOps! A letra digitada não é valida, por favor digite J para janela ou Cpara corredor:\n");
+        }
+    }
+
+    return vetor;
+
+}
+
+int lista(int vetJ[24], int vetC[24])
+{
+    int cont = 0;
+    printf("\nCerto, vou apresentar a lista com os lugares disponíveis:\n\n");
+
+    printf("Janela      |     Corredor     \n");
+    for(cont = 0; cont < 24; cont++){
+
+        if(cont >= 9){
+            if ((vetJ[cont] == 1) && (vetC[cont] == 1)){
+                char lugarJ[10] = "Ocupada";
+                char lugarC[10] = "Ocupada";
+                printf("%i- %s |     %i- %s    \n",cont+1, lugarJ, cont+1, lugarC);
+            }else if((vetJ[cont] == 1) && (vetC[cont] == 0)){
+                char lugarJ[10] = "Ocupada";
+                char lugarC[10] = "Livre";
+                printf("%i- %s |     %i- %s  \n",cont+1, lugarJ, cont+1, lugarC);
+            }else if((vetJ[cont] == 0) && (vetC[cont] == 1)){
+                char lugarJ[10] = "Livre";
+                char lugarC[10] = "Ocupada";
+                printf("%i- %s   |     %i- %s  \n",cont+1, lugarJ, cont+1, lugarC);
+            }else{
+                char lugarJ[10] = "Livre";
+                char lugarC[10] = "Livre";
+                printf("%i- %s   |     %i- %s  \n",cont+1, lugarJ, cont+1, lugarC);
+            }
+        }else{
+            if ((vetJ[cont] == 1) && (vetC[cont] == 1)){
+                char lugarJ[10] = "Ocupada";
+                char lugarC[10] = "Ocupada";
+                printf("%i- %s  |     %i- %s    \n",cont+1, lugarJ, cont+1, lugarC);
+            }else if((vetJ[cont] == 1) && (vetC[cont] == 0)){
+                char lugarJ[10] = "Ocupada";
+                char lugarC[10] = "Livre";
+                printf("%i- %s  |     %i- %s  \n",cont+1, lugarJ, cont+1, lugarC);
+            }else if((vetJ[cont] == 0) && (vetC[cont] == 1)){
+                char lugarJ[10] = "Livre";
+                char lugarC[10] = "Ocupada";
+                printf("%i- %s    |     %i- %s  \n",cont+1, lugarJ, cont+1, lugarC);
+            }else{
+                char lugarJ[10] = "Livre";
+                char lugarC[10] = "Livre";
+                printf("%i- %s    |     %i- %s  \n",cont+1, lugarJ, cont+1, lugarC);
+            }
+        }
+
+    }
+}
+
+int main()
+{
+    int onibus = 0;
+    int vetorJi[24], vetorCi[24];
+    int cont3 = 0, cont4 = 0;
+    setlocale(LC_ALL, "");
+    for(cont3 = 0;cont3 < 24; cont3 ++){
+        vetorJi
+        [cont3] = 0;
+    }
+    for(cont4 = 0;cont4 < 24; cont4 ++){
+        vetorCi[cont4] = 0;
+    }
+    printf("\nOlá! Eu sou a assistente virtual Sheyla e por aqui irei realizar o seu atendimento!\n");
+    printf("\nAbaixo irei listar as funções que poderá exercer, então escolha uma das opções digitando o numero!\n\n");
+    int cont, num, opcao;
+    for(cont = 0;cont < 999;cont ++){
+            int cont5 = 0;
+        while(cont5 == 0){
+        printf("\n1- Vender passagem\n2- Mostrar mapa de ocupação do ônibus\n3- Encerrar\n\n");
+        scanf("%i", &opcao);
+        cont5 = 1;
+            if(opcao == 1){
+                if(onibus == 1){
+                    printf("\nÔNIBUS LOTADO\n");
+                    cont5 = 0;
+                }
+            }
+        }
+    int cont2 = 0;
+        while(cont2 == 0){
+            if(opcao == 1){
+                num = lugar();
+                int num2 = num - 24;
+                int contVet = 0;
+                for(contVet = 0;contVet < 24; contVet++){
+                        if(num <= 24){
+                            if(contVet == (num - 1)){
+                                if(vetorJi[contVet] == 1){
+                                    printf("\nPOLTRONA OCUPADA\n\n");
+                                    printf("Por favor, escolha outra poltrona");
+                                }else{
+                                    vetorJi[contVet] = 1;
+                                    printf("\nVENDA EFETIVADA\n");
+                                }
+                            }
+                        }else{
+                            if(contVet == (num2 - 1)){
+                                if(vetorCi[contVet] == 1){
+                                    printf("\nPOLTRONA OCUPADA\n\n");
+                                    printf("Por favor, escolha outra poltrona");
+                                }else{
+                                    vetorCi[contVet] = 1;
+                                    printf("\nVENDA EFETIVADA\n");
+                                }
+                            }
+                        }
+                }
+                cont2 = 1;
+            }else if(opcao == 2){
+                lista(vetorJi, vetorCi);
+                cont2 = 1;
+            }else if(opcao == 3){
+                printf("\nCerto, vou encerrar o programa!\n\nQuando precisar é só chamar!\n");
+                exit(0);
+            }else{
+                printf("\nPor favor, digite apenas um numero entre 1 e 3!\nVou reapresentar as opções:\n\n");
+                printf("\n1- Vender passagem\n2- Mostrar mapa de ocupação do ônibus\n3- Encerrar\n");
+                scanf("%i", &opcao);
+            }
+        }
+
+        printf("\nE agora, o que quer fazer?\n");
+
+        int contBus = 0, contJi = 0, contCi = 0;
+
+        for(contBus = 0; contBus < 24; contBus ++){
+            if(vetorJi[contBus] == 1){
+                contJi += 1;
+            }
+            if(vetorCi[contBus] == 1){
+                contCi += 1;
+            }
+            if((contJi + contCi) == 48){
+                onibus = 1;
+            }
+        }
+
+    }
+
+    return 0;
+}
