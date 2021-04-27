@@ -1,0 +1,164 @@
+#include <stdio.h> //declaração de biblioteca
+#include <stdlib.h> //biblioteca para usar system cls
+
+int main()
+{
+//declaração de vetores
+    char nome_prod[100][100];
+    int quantidade[100];
+    float valor_unitario[100];
+    float percentual[100];
+
+//declaração de variaveis
+
+    int tipo;                  //area do produto
+    float novovalor ;
+    float valor_total;          //somar todos os valores com desconto
+    float valor_base;           //valores sem desconto
+    int qtd;
+    int i;                      //contador
+    char continuar;            //repetir ou não
+
+    char titulo[30] = ">>>      CAIXA LOJA     <<<";
+
+//------------------------------------------------------------------------------------------------
+    valor_total = 0;    //contador do valor total
+//------------------------------------------------------------------------------------------------
+    for (i =0; continuar != 'n'; i++)
+    {
+
+//titulo dentro de caixa
+        printf("%c",218);
+        printf("%c%c%c%c%c%c",196,196,196,196,196,196,196);
+        printf("%c%c%c%c%c%c",196,196,196,196,196,196,196);
+        printf("%c%c%c%c%c%c",196,196,196,196,196,196,196);
+        printf("%c%c%c%c%c%c",196,196,196,196,196,196,196);
+        printf("%c%c%c%c%c%c",196,196,196,196,196,196,196);
+        printf("%c\n",191);
+        printf("%c %-28s %c \n",179,titulo,179);
+        printf("%c",192);
+        printf("%c%c%c%c%c%c",196,196,196,196,196,196,196);
+        printf("%c%c%c%c%c%c",196,196,196,196,196,196,196);
+        printf("%c%c%c%c%c%c",196,196,196,196,196,196,196);
+        printf("%c%c%c%c%c%c",196,196,196,196,196,196,196);
+        printf("%c%c%c%c%c%c",196,196,196,196,196,196,196);
+        printf("%c\n\n",217);
+
+
+        //saida de dados para usuario
+        printf("\nQual o tipo do produto (1 - Informatica, 2 - Jogos, 3 - Eletronicos: )\n"); //mostra na tela
+        scanf("%i", &tipo); //recebe
+
+        printf("Qual o nome do produto: \n"); //mostra na tela
+        getchar();
+        scanf("%s", &nome_prod[i]); //recebe
+
+        //fgets(nome_prod,100,stdin);
+
+        printf("Qual o valor do produto: \n"); //mostra na tela
+        scanf("%f", &valor_unitario[i]); //recebe
+
+        printf("Quantidade de unidades adquirida: \n"); //mostra na tela
+        scanf("%i", &quantidade[i]); //recebe
+
+//------------------------------------------------------------------------------------------------
+        if (tipo == 1)  //caso seja produto informatica
+        {
+//calcular novo valor com desconto caso seja tipo 1
+
+            valor_unitario[i] *= quantidade[i]; //calcular valor pela qtd comprada
+
+            percentual[i] = (valor_unitario[i] * 0.05); //aplicar desconto de 5%
+
+            novovalor += ((valor_unitario[i] - percentual[i])); //calcular novo valor com desconto
+
+
+            //valor_total = novovalor;
+
+            //incrementar valor dos produtos comprados
+            valor_total++;
+
+        }
+        else //senão
+        {
+
+            if (tipo == 2) //caso seja produto jogo
+            {
+//calcular novo valor com desconto caso seja tipo 2
+
+                valor_unitario[i] *= quantidade[i]; //calcular valor pela qtd comprada
+
+                percentual[i] = (valor_unitario[i] * 0.08); //aplicar desconto de 8%
+
+                novovalor = (valor_unitario[i] - percentual[i]); //calcular novo valor com desconto
+
+                valor_total = novovalor;
+
+                //incrementar valor dos produtos comprados
+                valor_total++;
+              //  qtd += qtd;
+
+            }
+            else //senão
+            {
+
+                if (tipo == 3) //caso seja produto eletronico
+                {
+//calcular novo valor com desconto caso seja tipo 3
+
+                    valor_unitario[i] *= quantidade[i]; //calcular valor pela qtd comprada
+
+                    percentual[i] = (valor_unitario[i] * 0.1); //aplicar desconto de 10%
+
+                    novovalor = (valor_unitario[i] - percentual[i]); //calcular novo valor com desconto
+
+                    valor_total = novovalor;
+
+                    //incrementar valor dos produtos comprados
+                    valor_total++;
+                }
+            }
+        }
+//------------------------------------------------------------------------------------------------
+        //saber se deseja continuar com cadastro ou não
+        printf("\nDeseja continuar? \n\nDigite -s- para Sim ou -n- para Nao \n ");
+        scanf("%s", &continuar);
+        fflush(stdin);
+
+        system("cls"); //limpar tela antes de repetir o codigo
+//------------------------------------------------------------------------------------------------
+    }
+
+    //exibir relatorios na tela para usuario ao fim dos cadastros
+    printf("----------------------------------------------------------------------");
+    printf("\n--------------------->>>RELATORIO DE VENDA<<<-------------------------");
+    printf("\n----------------------------------------------------------------------");
+    printf("\n\n");
+
+
+    i = i -1;
+
+    int j = 0;
+
+    while (j <=i)
+    valor_total = novovalor;
+    {
+
+
+        printf("\nProduto: %s", nome_prod[j]); //mostrarprodutos comprados
+
+        printf("\nQuantidade: %i Unidade(s).......................................\n", quantidade[j]); //mostrar a quantidade comprada
+
+
+    printf("\nO valor do(s) produto(s) -sem- desconto e' de: R$%.2f .............. \n", valor_unitario[j]); //valor sem desconto
+
+    printf("\nFoi aplicado o desconto de: >>>R$%.2f reais<<< .....................\n", percentual[j]); //mostrar o valor do desconto
+    j++;
+}
+    printf("\nO valor do(s) produto(s) -com- desconto e' de: R$%.2f............... \n", valor_total-1); //valor com desconto
+
+
+
+
+    return 0;
+}
